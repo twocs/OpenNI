@@ -5,6 +5,12 @@
 @echo ********************************
 @echo.
 
+@echo.
+@echo *********************************
+@echo *** Checking prerequisites... ***
+@echo *********************************
+if NOT DEFINED DDKPATH goto ErrorDDK
+
 @echo *******************************************
 @echo *** Recreating the old Bin directory... ***
 @echo *******************************************
@@ -96,6 +102,18 @@ xcopy /E /I /Y sys\ps*.pdb ..\PDBs
 @echo ********************************************
 
 goto End
+
+:ErrorDDK
+@echo.
+@echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+@echo !!! An error occured searching for %DDKPATH%   !!!
+@echo !!! Ensure that WinDDK is installed and that   !!!
+@echo !!!   the DDKPATH environment variable is set. !!!
+@echo !!! Generally DDKPATH = C:\WinDDK\7600.16385.0 !!! 
+@echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+pause
+exit /b 1
+goto END
 
 :ErrorBuild
 @echo.
