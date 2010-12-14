@@ -255,7 +255,9 @@ int main(int argc, char* argv[])
 	}
 	else if (rc != XN_STATUS_OK)
 	{
-		printf("Open failed: %s\n", xnGetStatusString(rc));
+		XnChar message[1024];
+		sprintf(message, "Open Xml file \"%s\" failed: ", SAMPLE_XML_PATH);
+		xnPrintError(rc, message);
 		return (rc);
 	}
 
